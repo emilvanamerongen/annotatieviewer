@@ -17,8 +17,6 @@ public class Annotatieviewer {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("hoi2");
-        int coolgetalopnieuw = 3;
-        int nogeencoolergetal = 4;
     }
     
 }
