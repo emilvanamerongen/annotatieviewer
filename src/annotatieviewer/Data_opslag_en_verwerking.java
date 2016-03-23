@@ -9,14 +9,16 @@ package annotatieviewer;
  *
  * @author emilvanamerongen
  */
-public class Annotatieviewer {
+public class Data_opslag_en_verwerking {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("hoi2");
+        init();
+    }
+    public static void init(){
+        new Annotation_viewer_GUI().setVisible(true);
     }
     
 }
