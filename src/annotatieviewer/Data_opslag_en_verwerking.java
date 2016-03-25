@@ -5,12 +5,17 @@
  */
 package annotatieviewer;
 
+import java.util.HashMap;
+
 /**
  *
  * @author emilvanamerongen
  */
 public class Data_opslag_en_verwerking {
 
+    
+    public String sequence;
+    public HashMap<Integer,Gene> genes;
     /**
      * @param args the command line arguments
      */

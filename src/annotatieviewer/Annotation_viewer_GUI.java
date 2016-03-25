@@ -5,6 +5,10 @@
  */
 package annotatieviewer;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
 /**
  *
  * @author EvertMichel
@@ -239,7 +243,12 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String filename = File.separator+"tmp";
+        JFileChooser fileChooser = new JFileChooser(new File(filename));
+        fileChooser.showOpenDialog(jDialog1);
+        File filepath = fileChooser.getSelectedFile();
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
