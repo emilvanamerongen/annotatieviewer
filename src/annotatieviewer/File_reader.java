@@ -103,7 +103,6 @@ public class File_reader {
         }
         System.out.println("loaded "+newgenes.size()+" sequences...");
         Data_opslag_en_verwerking.setgenes(newgenes);
-        System.out.println(newgenes.get(5).getSymbol());
-        System.out.println(newgenes.get(5).getFeatures().get(1).getStart());
+        newgenes.clear();
     }
 }

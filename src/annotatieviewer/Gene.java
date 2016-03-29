@@ -18,6 +18,13 @@ public class Gene {
     private String score;
     private HashMap<Integer,Feature> features = new HashMap<>();
 
+    /**
+     *
+     * @param newsymbol
+     * @param newgene_id
+     * @param newdiscription
+     * @param newscore
+     */
     public Gene(String newsymbol,Integer newgene_id,String newdiscription,String newscore) {
         this.symbol = newsymbol;
         this.gene_id = newgene_id;
@@ -80,6 +87,10 @@ public class Gene {
         this.features = features;
     }
     
+    /**
+     *
+     * @param newfeature
+     */
     public void addFeature(Feature newfeature){
         Integer featureid = newfeature.getFeature_id();
         this.features.put(featureid, newfeature);
