@@ -15,7 +15,7 @@ public class Data_opslag_en_verwerking {
 
     
     public static String sequence;
-    public HashMap<Integer,Gene> genes;
+    public static HashMap<Integer,Gene> genes;
     /**
      * @param args the command line arguments
      */
@@ -27,6 +27,9 @@ public class Data_opslag_en_verwerking {
     }
     public static void setsequence(String newsequence){
         sequence = newsequence;
+    }
+    public static void setgenes(HashMap<Integer,Gene> newgenes){
+        genes = newgenes;
     }
     
 }

@@ -14,6 +14,14 @@ public class Feature {
     private String featuretype;
     private Integer start;
     private Integer stop;
+    private Integer strand;
+    public Feature(Integer newfeature_id, String newfeaturetype, Integer newstart, Integer newstop, Integer newstrand){
+        this.feature_id = newfeature_id;
+        this.featuretype = newfeaturetype;
+        this.start = newstart;
+        this.stop = newstop;
+        this.strand = newstrand;
+}
 
     /**
      * @return the feature_id
@@ -69,5 +77,19 @@ public class Feature {
      */
     public void setStop(Integer stop) {
         this.stop = stop;
+    }
+
+    /**
+     * @return the strand
+     */
+    public Integer getStrand() {
+        return strand;
+    }
+
+    /**
+     * @param strand the strand to set
+     */
+    public void setStrand(Integer strand) {
+        this.strand = strand;
     }
 }
