@@ -12,6 +12,7 @@ import java.util.HashMap;
  * @author EvertMichel
  */
 public class Gene {
+    private String symbol;
     private int gene_id;
     private String discription;
     private int score;
@@ -71,5 +72,19 @@ public class Gene {
      */
     public void setFeatures(HashMap<Integer,Feature> features) {
         this.features = features;
+    }
+
+    /**
+     * @return the symbol
+     */
+    public String getSymbol() {
+        return symbol;
+    }
+
+    /**
+     * @param symbol the symbol to set
+     */
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }

@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Data_opslag_en_verwerking {
 
     
-    public String sequence;
+    public static String sequence;
     public HashMap<Integer,Gene> genes;
     /**
      * @param args the command line arguments
@@ -24,6 +24,9 @@ public class Data_opslag_en_verwerking {
     }
     public static void init(){
         new Annotation_viewer_GUI().setVisible(true);
+    }
+    public static void setsequence(String newsequence){
+        sequence = newsequence;
     }
     
 }
