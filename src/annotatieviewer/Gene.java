@@ -15,9 +15,15 @@ public class Gene {
     private String symbol;
     private int gene_id;
     private String discription;
-    private int score;
-    private HashMap<Integer,Feature> features;
+    private String score;
+    private HashMap<Integer,Feature> features = new HashMap<>();
 
+    public Gene(String newsymbol,Integer newgene_id,String newdiscription,String newscore) {
+        this.symbol = newsymbol;
+        this.gene_id = newgene_id;
+        this.discription = newdiscription;
+        this.score = newscore;
+    }
     /**
      * @return the gene_id
      */
@@ -49,14 +55,14 @@ public class Gene {
     /**
      * @return the score
      */
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 
     /**
      * @param score the score to set
      */
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
@@ -72,6 +78,11 @@ public class Gene {
      */
     public void setFeatures(HashMap<Integer,Feature> features) {
         this.features = features;
+    }
+    
+    public void addFeature(Feature newfeature){
+        Integer featureid = newfeature.getFeature_id();
+        this.features.put(featureid, newfeature);
     }
 
     /**

@@ -60,27 +60,50 @@ public class File_reader {
         Boolean active = false;
         int genenumber = 0;
         int featurenumber = 0;
+        String genename = "";
+        String discription = "";
+        String score = ""; 
+        String featuretype = "";
+        String start = "";
+        String stop = "";
+        int strand = 0;
+        HashMap<Integer, Feature> featuretemp = new HashMap<>();
+        HashMap<Integer, Gene> newgenes = new HashMap<>();
         for (String line : Files.readAllLines(filepath)){
-            if (active){
-                String[] splitline = line.split("\t");
-                int feature_id = featurenumber;
-                featurenumber += 1;
-                
-                        
-            }
-            if (line.contains("\tgene\t")){
-                active = true;
-                String[] splitline = line.split("\t");
-                int geneid = genenumber;
+            if (line.contains("start gene")){
                 genenumber += 1;
-                String discription = splitline[0];
-                int score = Integer.parseInt(splitline[5]);
-                HashMap<Integer, Feature> features = new HashMap<>();
+                genename = line.split(" ")[3];          
+        }
+            if (line.contains("\tgene\t")){
+                String[] linesplit = line.split("\t");
+                discription = linesplit[8];
+                score = linesplit[5];
+                newgenes.put(genenumber, new Gene(genename,genenumber,discription,score));
             }
-            if (line.contains("stop")){
-                active = false;
+            if (line.contains("SD\t")){
+                featurenumber += 1;
+                String[] linesplit = line.split("\t");
+                featuretype = linesplit[2];
+                start = linesplit[3];
+                stop = linesplit[4];
+
+                if (linesplit[6].contains("-")){
+                    strand = 0;
+                }
+                else{
+                    strand = 1;
+                }
+                Feature newfeature = new Feature(featurenumber,featuretype,Integer.parseInt(start),Integer.parseInt(stop),strand);
+                newgenes.get(genenumber).addFeature(newfeature);
+            }
+            if (line.contains("coding")){               
+                featuretemp.clear();
+                featurenumber = 0;
             }
         }
-        System.out.println("new sequence loaded....");
+        System.out.println("loaded "+newgenes.size()+" sequences...");
+        Data_opslag_en_verwerking.setgenes(newgenes);
+        System.out.println(newgenes.get(5).getSymbol());
+        System.out.println(newgenes.get(5).getFeatures().get(1).getStart());
     }
 }

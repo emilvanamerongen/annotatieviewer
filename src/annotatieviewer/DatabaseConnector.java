@@ -23,13 +23,12 @@ public class DatabaseConnector{
      */
     public static void main(String[] args) throws SQLException {
         Connection conn = getConnection();
-        ResultSet results = excecutequery(conn);
+        ResultSet results = excecutequery(conn,"SELECT * FROM gene");
         while (results.next()) {
         System.out.println(results.getString("discription"));
 }
     }
-    
-    
+
     public static Connection getConnection() throws SQLException {
     System.out.println("trying to connect");
     Connection conn = null;
@@ -41,11 +40,11 @@ public class DatabaseConnector{
     System.out.println("Connected to database");
     return conn;
 }
-    public static ResultSet excecutequery(Connection conn) throws SQLException{
+    public static ResultSet excecutequery(Connection conn, String query) throws SQLException{
         System.out.println("executing query...");
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM gene");
+            rs = stmt.executeQuery(query);
         }
         catch (SQLException ex){
             // handle any errors
