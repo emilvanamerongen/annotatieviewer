@@ -16,6 +16,7 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -245,8 +246,6 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("|");
-
         jLabel4.setText("Zoekterm");
 
         jLabel5.setFont(new java.awt.Font("VAGRounded BT", 0, 24)); // NOI18N
@@ -298,7 +297,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -368,22 +367,23 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(37, 37, 37))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(29, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,9 +396,9 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -494,16 +494,43 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
    
     
     public static void visualise(){  
-        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*4.85), 450));
+        int sequencelength = (int) (Data_opslag_en_verwerking.sequence.length()*5.34);
+        jPanel1.setPreferredSize(new Dimension(sequencelength, 450));
         draw();
     }
     public static void draw(){
         Graphics paper = jPanel1.getGraphics();
         paper.setColor(Color.black);
         paper.setFont(new Font("courier", Font.PLAIN, 11));
-        paper.drawString(Data_opslag_en_verwerking.sequence, 20, 200);
+        String drawstring = Data_opslag_en_verwerking.sequence;
+        drawchars(drawstring);
     }
-
+    
+    public static void drawchars(String drawstring){
+        Integer position = 0;
+        HashMap<Integer, String> substrings = new HashMap<>();
+        int teller = 0;
+        int substringnumber = 0;
+        String tempchar = "";
+        for (Character character : drawstring.toCharArray()){
+            tempchar += ""+character;
+            if (teller == 200){
+                teller = 0;
+                substrings.put(substringnumber, tempchar);
+                substringnumber +=1;
+                tempchar ="";     
+            }
+            teller+=1;
+        }
+        Graphics paper = jPanel1.getGraphics();
+        paper.setColor(Color.black);
+        paper.setFont(new Font("TlwgMono", Font.PLAIN, 14));
+        for (String substring : substrings.values()){  
+            paper.drawString(substring, position ,200);
+            position+=14*200;
+        }
+        
+    }
 
     
     public static void main(String args[]) {
