@@ -16,6 +16,7 @@ public class Data_opslag_en_verwerking {
 
     
     public static String sequence = "empty";
+    public static HashMap<Integer, String> substrings = new HashMap<>();
     public static HashMap<Integer,Gene> genes = new HashMap<>();
     public static HashMap<String,String> Translator = new HashMap<>(); //hij wou ze niet achter elkaar, dat gaf een foutmelding
     public static String AmminoSequence;
@@ -38,11 +39,27 @@ public class Data_opslag_en_verwerking {
      * @param newsequence give the a sequence
      */
     public static void setsequence(String newsequence){
-        sequence = newsequence.replace(" ", "");
-        AmminoSequence=TranslateSequence(sequence);
+        sequence = newsequence.replace("\n", "");
+        System.out.println("splitting sequence in 200 base substrings...");
+        int teller = 0;
+        int substringnumber = 0;
+        String tempchar = "";
+        for (Character character : sequence.toCharArray()){
+            tempchar += ""+character;
+            if (teller == 200){
+                teller = 0;
+                substrings.put(substringnumber, tempchar);
+                substringnumber +=1;
+                tempchar ="";     
+            }
+            teller+=1;
+        if (tempchar != ""){
+            substrings.put(substringnumber, tempchar);
+        } 
         Annotation_viewer_GUI.visualise();
     }
-    public static String TranslateSequence(String sequence){
+    }
+    public static void TranslateSequence(){     
         String NewSequence="";
         int Nucleotides =sequence.length()/3;
         Translator.put("atg", "met");
@@ -116,9 +133,9 @@ public class Data_opslag_en_verwerking {
                 AmminoSequence+=Translator.get(codon);
             }
             }
-        System.out.println(AmminoSequence);
-        return NewSequence;
+        AmminoSequence = NewSequence;
     }
+
     /**
      * sets the genes in the annotiation viewer
      * @param newgenes 

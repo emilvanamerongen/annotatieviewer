@@ -251,15 +251,19 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("VAGRounded BT", 0, 24)); // NOI18N
         jLabel5.setText("Annotatie viewer - projectgroep 8");
 
+        jTextField8.setFont(new java.awt.Font("TlwgMono", 1, 10)); // NOI18N
         jTextField8.setText("sequence");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField8))
+            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,7 +407,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -478,6 +482,10 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         draw();
     }//GEN-LAST:event_jTextField7KeyTyped
 
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
             
    
     
@@ -486,8 +494,9 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
     
     public static void visualise(){  
-        int sequencelength = (int) (Data_opslag_en_verwerking.sequence.length()*5.34);
-        jPanel1.setPreferredSize(new Dimension(sequencelength, 450));
+        int sequencelength = Data_opslag_en_verwerking.sequence.length();
+        int substringcount = Data_opslag_en_verwerking.substrings.size();
+        jLabel12.setText(""+substringcount);
         draw();
     }
     public static void draw(){
@@ -501,24 +510,8 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         if (jTextField7.getText() != ""){
         Integer currentposition = Integer.parseInt(jTextField7.getText());
         Integer position = 0;
-        String Drawstring = Data_opslag_en_verwerking.sequence;
-        HashMap<Integer, String> substrings = new HashMap<>();
-        int teller = 0;
-        int substringnumber = 0;
-        String tempchar = "";
-        for (Character character : Drawstring.toCharArray()){
-            tempchar += ""+character;
-            if (teller == 200){
-                teller = 0;
-                substrings.put(substringnumber, tempchar);
-                substringnumber +=1;
-                tempchar ="";     
-            }
-            teller+=1;
-        }
-        jTextField8.setText(substrings.get(currentposition));
-        
-        
+        HashMap<Integer, String> substrings = Data_opslag_en_verwerking.substrings;
+        jTextField8.setText(substrings.get(currentposition));  
         }
         
     }
