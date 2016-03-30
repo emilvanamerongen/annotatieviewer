@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Data_opslag_en_verwerking {
 
     
-    public static String sequence = "";
+    public static String sequence = "empty";
     public static HashMap<Integer,Gene> genes = new HashMap<>();
     /**
      * @param args the command line arguments
