@@ -60,9 +60,61 @@ public class Data_opslag_en_verwerking {
         Translator.put("gtg", "val");
         Translator.put("gtt", "val");
         Translator.put("gtc", "val");
+        Translator.put("tct", "ser");
+        Translator.put("tca", "ser");
+        Translator.put("tcg", "ser");
+        Translator.put("tcc", "ser");
+        Translator.put("cct", "pro");
+        Translator.put("cca", "pro");
+        Translator.put("ccg", "pro");
+        Translator.put("ccc", "pro");
+        Translator.put("act", "thr");
+        Translator.put("acg", "thr");
+        Translator.put("acc", "thr");
+        Translator.put("aca", "thr");
+        Translator.put("gct", "ala");
+        Translator.put("gca", "ala");
+        Translator.put("gcc", "ala");
+        Translator.put("gcg", "ala");
+        Translator.put("tat", "tyr");
+        Translator.put("tac", "tyr");
+        Translator.put("taa", "STP");
+        Translator.put("tag", "STP");
+        Translator.put("cat", "his");
+        Translator.put("cac", "his");
+        Translator.put("caa", "gln");
+        Translator.put("cag", "gln");
+        Translator.put("aat", "asn");
+        Translator.put("aac", "asn");
+        Translator.put("aaa", "lys");
+        Translator.put("aag", "lys");
+        Translator.put("gat", "asp");
+        Translator.put("gac", "asp");
+        Translator.put("gaa", "glu");
+        Translator.put("gag", "glu");
+        Translator.put("tgt", "cys");
+        Translator.put("tgc", "cys");
+        Translator.put("uta", "STP");
+        Translator.put("tgg", "trp");
+        Translator.put("cgt", "arg");
+        Translator.put("cgc", "arg");
+        Translator.put("cgg", "arg");
+        Translator.put("cga", "arg");
+        Translator.put("agt", "ser");
+        Translator.put("agc", "ser");
+        Translator.put("aga", "arg");
+        Translator.put("agg", "arg");
+        Translator.put("ggt", "gly");
+        Translator.put("gga", "gly");
+        Translator.put("ggc", "gly");
+        Translator.put("ggg", "gly");
         for(int i=0;i<Nucleotides;i++){
             String codon = (String) sequence.subSequence(i, i+3);
-            AmminoSequence+=Translator.get(codon);
+            if (Translator.get(codon)==null){
+                AmminoSequence+="***";
+            }else{
+                AmminoSequence+=Translator.get(codon);
+            }
             }
         System.out.println(AmminoSequence);
         return NewSequence;
