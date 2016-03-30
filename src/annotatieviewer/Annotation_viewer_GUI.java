@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * De GUI van onze annotatieviewer
  * @author Emil van Amerongen
  */
 public class Annotation_viewer_GUI extends javax.swing.JFrame {
@@ -599,46 +599,54 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Data_opslag_en_verwerking.dnaorprotein = false;
+        setsequencetext();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Data_opslag_en_verwerking.dnaorprotein = true;
+        setsequencetext();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-            
-     
+    /**
+     * nieuwe visualisatie vanuit de dataopslag (nieuwe gegevens toegevoegd)
+     */
     public static void visualise(){  
-        int sequencelength = Data_opslag_en_verwerking.sequence.length();
+        //bereken het aantal substrings (pagina's) voor de GUI
         int substringcount = Data_opslag_en_verwerking.substrings.size();
         jLabel12.setText(""+substringcount);
+        // volgende stap voor visualisatie, de sequentietext in de textfields zetten
         setsequencetext();
     }
 
-    
+    /**
+     * zet de DNA of Aminozuursequentie met complementaire strand in de 2 textfields
+     */
     public static void setsequencetext(){
         int currentposition = 0;
-        try{ 
-        if (jTextField7.getText() != ""){
+        try{
+        // huidige weergave positie wordt opgehaald
         currentposition = Integer.parseInt(jTextField7.getText());
+        // locale variabelen
         Integer position = 0;
         HashMap<Integer, String> substrings;
-        if (Data_opslag_en_verwerking.dnaorprotein){
+        // er wordt gecheckt of de boolean uit de data oplag. aangeeft dat er een DNA sequentie wordt gevraagt of een Aminozuursequentie
+        if (Data_opslag_en_verwerking.dnaorprotein){//DNA sequentie weergeven
         substrings = Data_opslag_en_verwerking.aminosubstrings;
         jTextField8.setText(substrings.get(currentposition));  
         jTextField9.setText(Data_opslag_en_verwerking.aminosubstringsreverse.get(currentposition));
         jLabel13.setText("base "+currentposition*200+"|"+((currentposition*200)+200));
         }
-        else{
-        substrings = Data_opslag_en_verwerking.substrings;
-               
+        else{//aminozuursequentie weergeven
+        substrings = Data_opslag_en_verwerking.substrings;  
         jTextField8.setText(substrings.get(currentposition));  
         jTextField9.setText(Sequencetools.complement(substrings.get(currentposition)));
         jLabel13.setText("base "+currentposition*200+"|"+((currentposition*200)+200));
         }
+        // als het genen weergeven menuitem actief is, teken de annotatie in de GUI
         if (jCheckBoxMenuItem1.getState()){
             drawannotation(currentposition*200);
         }
-        }
+        
         }
         catch (java.lang.NumberFormatException ex){
         System.out.println("cannot find: "+jTextField7.getText());    
@@ -647,9 +655,12 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         
     }
  
-    
+    /**
+     * teken lijnen en beschrijvingen in de jpanels voor de forward en reverse strand.
+     * @param currentpositioninput de huidige positie die gevisualiseerd wordt
+     */
     public static void drawannotation(Integer currentpositioninput){
-        
+        // haal graphics op voor de forward en reverse strand jpanels
         Graphics paper = jPanel1.getGraphics();
         Graphics paper2 = jPanel2.getGraphics();
         // clear panel1
@@ -660,18 +671,25 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         paper2.setColor(Color.white);
         paper2.fillRect(0, 0, 2000, 2000);
         paper2.setColor(Color.black);
+        // sla de curentpostion lokaal op en maak een double met dezelfde waarde voor berekeningen
         Integer currentposition = currentpositioninput;
         Double currentpositiondouble = currentposition.doubleValue();
         Integer currentpositionstop = currentposition+200;
-        for (Gene gene : Data_opslag_en_verwerking.genes){     
+        // loop over alle gene bestanden uit de dataopslag
+        for (Gene gene : Data_opslag_en_verwerking.genes){  
+            //loop over alle features voor elk gen
             for (Feature feature : gene.getFeatures()){
+                //haal de start en stoppositie op uit de feature en sla deze op als double
                 Double start = feature.getStart().doubleValue();
                 Double stop = feature.getStop().doubleValue();
+                //als de range van de sequentie overlapt met de range van de gevisualiseerde sequentie teken deze feature
                 if (max(start,currentposition) <= min(stop,currentpositionstop)){
+                    //bereken het x coordinaat voor start en stop in px
                     int startpositionx = (int) (1204.00*((start-currentpositiondouble)/200));
                     int stoppositionx = (int) (1204.00*((stop-currentpositiondouble)/200));
+                    // als de huidige feature een transcript is, teken een zwarte lijn en schrijf de naam, beschrijving en score erboven of onder
                     if (feature.getFeaturetype().contains("transcript")){
-                        //forward strand draw
+                        //forward strand draw, teken de feature op de forward strand jpanel
                         if (feature.getStrand() == 1){
                         paper.setColor(Color.black);
                         paper.drawString(gene.getSymbol(),startpositionx,190);
@@ -681,7 +699,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                         }
                         paper.drawLine(startpositionx, 200,stoppositionx,200);
                         }
-                        //reverse strand draw
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
                         if (feature.getStrand() == 0){
                         paper2.setColor(Color.black);
                         paper2.drawString(gene.getSymbol(),startpositionx,20);
@@ -693,24 +711,27 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                         }
                         
                     }
+                    // als de huidige feature een start codon is teken een rode lijn in een jpanel
                     if (feature.getFeaturetype().contains("start_codon")){
-                        //forward strand draw
+                        //forward strand draw, teken de feature op de forward strand jpanel
                         if (feature.getStrand() == 1){ 
                         paper.setColor(Color.red);
                         paper.drawLine(startpositionx, 200, stoppositionx,200);
                         }
-                        //reverse strand draw
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
                         if (feature.getStrand() == 0){ 
                         paper2.setColor(Color.red);
                         paper2.drawLine(startpositionx, 10, stoppositionx,10);
                         }
                     }
+                    // als de huidige feature een stop codon is teken een blauwe lijn in een jpanel
                     if (feature.getFeaturetype().contains("stop_codon")){
+                        //forward strand draw, teken de feature op de forward strand jpanel
                         if (feature.getStrand() == 1){ 
                         paper.setColor(Color.blue);
                         paper.drawLine(startpositionx, 200 ,stoppositionx, 200);
                         }
-                        //reverse strand draw
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
                         if (feature.getStrand() == 0){ 
                         paper2.setColor(Color.red);
                         paper2.drawLine(startpositionx, 10, stoppositionx,10);
@@ -722,6 +743,10 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
     }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
- * @author EvertMichel
+ * een opslag object voor genen
+ * @author Emil
  */
 public class Gene {
     private String symbol;
@@ -21,11 +21,11 @@ public class Gene {
     private List<Feature> features = new ArrayList<Feature>();
 
     /**
-     *
-     * @param newsymbol
-     * @param newgene_id
-     * @param newdiscription
-     * @param newscore
+     * constructor opslag object voor genen
+     * @param newsymbol nieuwe naam voor het gen
+     * @param newgene_id nieuw id voor het gen
+     * @param newdiscription nieuwe beschrijving van het gen
+     * @param newscore nieuwe score van het gen
      */
     public Gene(String newsymbol,Integer newgene_id,String newdiscription,String newscore) {
         this.symbol = newsymbol;

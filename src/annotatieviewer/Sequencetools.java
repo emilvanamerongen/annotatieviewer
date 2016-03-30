@@ -9,13 +9,21 @@ import java.util.HashMap;
 
 
 /**
- *
+ * alle tools voor het bewerken van DNA en aminozuursequenties
  * @author Emil
  */
 public class Sequencetools {
     
+    /**
+     * tijdelijke opslag voor de translator
+     */
     public static HashMap<String,String> Translator = new HashMap<>();
     
+    /**
+     * maak de complementaire strand voor de DNA sequentie
+     * @param dna een DNA sequentie
+     * @return complementaire DNA sequentie 
+     */
     public static String complement(String dna){
         System.out.println("generating complement DNA...");
         String comp = null;
@@ -41,7 +49,13 @@ public class Sequencetools {
 
         return comp;
  }
-        public static String TranslateSequence(String sequence){
+
+    /**
+     * vertaal de DNA sequentie naar een aminozuursequentie (WORK IN PROGRESS)
+     * @param sequence een DNA sequentie
+     * @return aminozuursequentie
+     */
+    public static String TranslateSequence(String sequence){
         System.out.println("translating DNA sequence to Aminoacid sequence...");
         String NewSequence="";
         int Nucleotides =sequence.length()/3;
@@ -119,6 +133,11 @@ public class Sequencetools {
         return NewSequence;
     }
         
+    /**
+     * maak substrings van je sequentie een return deze als een hashmap
+     * @param sequence een DNA of aminozuur sequentie
+     * @return een hashmap met substrings van 200 letters 
+     */
     public static HashMap<Integer, String> createsubstrings(String sequence){
         System.out.println("splitting sequence in 200 base substrings...");
         HashMap<Integer, String> newsubstrings = new HashMap<>();
