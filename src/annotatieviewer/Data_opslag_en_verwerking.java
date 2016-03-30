@@ -38,17 +38,33 @@ public class Data_opslag_en_verwerking {
      * @param newsequence give the a sequence
      */
     public static void setsequence(String newsequence){
-        sequence = newsequence;
+        sequence = newsequence.replace(" ", "");
         AmminoSequence=TranslateSequence(sequence);
         Annotation_viewer_GUI.visualise();
     }
     public static String TranslateSequence(String sequence){
         String NewSequence="";
         int Nucleotides =sequence.length()/3;
+        Translator.put("atg", "met");
+        Translator.put("ttt", "phe");
+        Translator.put("ttc", "phe");
+        Translator.put("tta", "leu");
+        Translator.put("ttg", "leu");
+        Translator.put("ctt", "leu");
+        Translator.put("cta", "leu");
+        Translator.put("ctg", "leu");
+        Translator.put("att", "ile");
+        Translator.put("atc", "ile");
+        Translator.put("ata", "ile");
+        Translator.put("gta", "val");
+        Translator.put("gtg", "val");
+        Translator.put("gtt", "val");
+        Translator.put("gtc", "val");
         for(int i=0;i<Nucleotides;i++){
             String codon = (String) sequence.subSequence(i, i+3);
-            
+            AmminoSequence+=Translator.get(codon);
             }
+        System.out.println(AmminoSequence);
         return NewSequence;
     }
     /**
