@@ -16,6 +16,7 @@ public class Data_opslag_en_verwerking {
     
     public static String sequence = "";
     public static HashMap<Integer,Gene> genes = new HashMap<>();
+    public static String AmminoSequence;
     /**
      * @param args the command line arguments
      */
@@ -35,6 +36,11 @@ public class Data_opslag_en_verwerking {
     public static void setsequence(String newsequence){
         sequence = newsequence;
         Annotation_viewer_GUI.visualise();
+    }
+    public static String TranslateSequence(String sequence){
+        String NewSequence="";
+        
+        return NewSequence;
     }
     /**
      * sets the genes in the annotiation viewer
