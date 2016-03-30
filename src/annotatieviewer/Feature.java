@@ -6,8 +6,8 @@
 package annotatieviewer;
 
 /**
- *
- * @author EvertMichel
+ * een opslag object voor features
+ * @author Emil
  */
 public class Feature {
     private Integer feature_id;
@@ -15,6 +15,15 @@ public class Feature {
     private Integer start;
     private Integer stop;
     private Integer strand;
+
+    /**
+     * constructor opslag object voor features
+     * @param newfeature_id een nieuw feature id 
+     * @param newfeaturetype een nieuw featuretype bv. start_codon
+     * @param newstart een nieuwe start positie voor de feature
+     * @param newstop een nieuwe stop positie voor de feature
+     * @param newstrand forward of reverse strand (1 of 0)
+     */
     public Feature(Integer newfeature_id, String newfeaturetype, Integer newstart, Integer newstop, Integer newstrand){
         this.feature_id = newfeature_id;
         this.featuretype = newfeaturetype;

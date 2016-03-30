@@ -5,25 +5,27 @@
  */
 package annotatieviewer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- *
- * @author EvertMichel
+ * een opslag object voor genen
+ * @author Emil
  */
 public class Gene {
     private String symbol;
     private int gene_id;
     private String discription;
     private String score;
-    private HashMap<Integer,Feature> features = new HashMap<>();
+    private List<Feature> features = new ArrayList<Feature>();
 
     /**
-     *
-     * @param newsymbol
-     * @param newgene_id
-     * @param newdiscription
-     * @param newscore
+     * constructor opslag object voor genen
+     * @param newsymbol nieuwe naam voor het gen
+     * @param newgene_id nieuw id voor het gen
+     * @param newdiscription nieuwe beschrijving van het gen
+     * @param newscore nieuwe score van het gen
      */
     public Gene(String newsymbol,Integer newgene_id,String newdiscription,String newscore) {
         this.symbol = newsymbol;
@@ -76,14 +78,14 @@ public class Gene {
     /**
      * @return the features
      */
-    public HashMap<Integer,Feature> getFeatures() {
+    public List<Feature> getFeatures() {
         return features;
     }
 
     /**
      * @param features the features to set
      */
-    public void setFeatures(HashMap<Integer,Feature> features) {
+    public void setFeatures(List<Feature> features) {
         this.features = features;
     }
     
@@ -92,8 +94,7 @@ public class Gene {
      * @param newfeature
      */
     public void addFeature(Feature newfeature){
-        Integer featureid = newfeature.getFeature_id();
-        this.features.put(featureid, newfeature);
+        this.features.add(newfeature);
     }
 
     /**

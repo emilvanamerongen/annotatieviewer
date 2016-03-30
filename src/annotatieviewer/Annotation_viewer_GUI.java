@@ -5,25 +5,24 @@
  */
 package annotatieviewer;
 
-import static annotatieviewer.Annotation_viewer_GUI.jScrollPane1;
 import java.awt.Adjustable;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.IOException;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author EvertMichel
+ * De GUI van onze annotatieviewer
+ * @author Emil van Amerongen
  */
 public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
@@ -62,12 +61,21 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -76,6 +84,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -237,70 +246,91 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
         jTextField2.getAccessibleContext().setAccessibleDescription("");
 
+        jButton8.setText("jButton8");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.setToolTipText("Search...");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Zoekterm");
+        setResizable(false);
 
         jLabel5.setFont(new java.awt.Font("VAGRounded BT", 0, 24)); // NOI18N
         jLabel5.setText("Annotatie viewer - projectgroep 8");
 
-        jScrollPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jScrollPane1AncestorMoved(evt);
-            }
-        });
-        jScrollPane1.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-                jScrollPane1AncestorMoved1(evt);
-            }
-            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
-            }
-        });
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseReleased(evt);
-            }
-        });
-        jScrollPane1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jScrollPane1CaretPositionChanged(evt);
-            }
-        });
-        jScrollPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jScrollPane1PropertyChange(evt);
-            }
-        });
-
-        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 100));
-        jPanel1.setPreferredSize(new java.awt.Dimension(2000, 450));
-        jPanel1.setVerifyInputWhenFocusTarget(false);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2000, Short.MAX_VALUE)
+            .addGap(0, 1204, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 204, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jPanel1);
+        jTextField7.setText("0");
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField7KeyTyped(evt);
+            }
+        });
+
+        jLabel11.setText("|  ");
+
+        jLabel12.setText("0");
+
+        jLabel13.setText("Base 1 | 200");
+
+        jButton6.setText("<");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText(">");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jTextField8.setFont(new java.awt.Font("Courier New", 0, 10)); // NOI18N
+        jTextField8.setText("sequence");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+
+        jTextField9.setFont(new java.awt.Font("Courier New", 0, 10)); // NOI18N
+        jTextField9.setText("complement");
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1204, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 203, Short.MAX_VALUE)
+        );
+
+        jLabel4.setText("Forward >");
+
+        jLabel14.setText("< reverse");
 
         jMenu1.setText("Bestand");
 
@@ -328,31 +358,56 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/Clustering_treeRecon_Icon_AlignmentOnly.png"))); // NOI18N
         jMenuItem3.setText("Nucleotide-niveau weergeven");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/protein.png"))); // NOI18N
         jMenuItem4.setText("Aminozuur-niveau weergeven");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Genen weergeven");
         jCheckBoxMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/db_pubmed.gif"))); // NOI18N
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jCheckBoxMenuItem1);
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("Beschrijving weergeven");
+        jCheckBoxMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/db_pubmed.gif"))); // NOI18N
+        jMenu2.add(jCheckBoxMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Zoek");
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/5-search-icon.png"))); // NOI18N
-        jMenuItem5.setText("Zoeken naar positie");
+        jMenuItem5.setText("Zoeken naar positie POC");
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/5-search-icon.png"))); // NOI18N
-        jMenuItem6.setText("Zoeken naar gen");
+        jMenuItem6.setText("Zoeken naar gen POC");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/annotatieviewer/icons/5-search-icon.png"))); // NOI18N
-        jMenuItem7.setText("Zoeken in sequentie");
+        jMenuItem7.setText("Zoeken in sequentie POC");
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
@@ -375,30 +430,70 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                                 .addGap(119, 119, 119)
                                 .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(37, 37, 37))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))))
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel13)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel14)
+                                .addContainerGap())))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField8)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 1204, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(7, 7, 7)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jButton6)
+                            .addComponent(jButton7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -408,10 +503,6 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jDialog1.setVisible(true);
         jDialog1.setSize(155, 525);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -469,70 +560,193 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jScrollPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jScrollPane1PropertyChange
-                AdjustmentListener listener = new MyAdjustmentListener();
-                jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(listener);
-    }//GEN-LAST:event_jScrollPane1PropertyChange
+    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
+        setsequencetext();
 
-    private void jScrollPane1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jScrollPane1CaretPositionChanged
+    }//GEN-LAST:event_jTextField7KeyTyped
 
-    }//GEN-LAST:event_jScrollPane1CaretPositionChanged
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
-    private void jScrollPane1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseReleased
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Integer currentposition = Integer.parseInt(jTextField7.getText());
+        jTextField7.setText(Integer.toString(currentposition-1));
+        setsequencetext();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
-    }//GEN-LAST:event_jScrollPane1MouseReleased
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       Integer currentposition = Integer.parseInt(jTextField7.getText());
+        jTextField7.setText(Integer.toString(currentposition+1));
+        setsequencetext();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jScrollPane1AncestorMoved1(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jScrollPane1AncestorMoved1
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
-    }//GEN-LAST:event_jScrollPane1AncestorMoved1
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
-    private void jScrollPane1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jScrollPane1AncestorMoved
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    }//GEN-LAST:event_jScrollPane1AncestorMoved
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        setsequencetext();
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
-            
-   
-    
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Data_opslag_en_verwerking.dnaorprotein = false;
+        setsequencetext();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Data_opslag_en_verwerking.dnaorprotein = true;
+        setsequencetext();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    /**
+     * nieuwe visualisatie vanuit de dataopslag (nieuwe gegevens toegevoegd)
+     */
     public static void visualise(){  
-        int sequencelength = (int) (Data_opslag_en_verwerking.sequence.length()*5.34);
-        jPanel1.setPreferredSize(new Dimension(sequencelength, 450));
-        draw();
+        //bereken het aantal substrings (pagina's) voor de GUI
+        int substringcount = Data_opslag_en_verwerking.substrings.size();
+        jLabel12.setText(""+substringcount);
+        // volgende stap voor visualisatie, de sequentietext in de textfields zetten
+        setsequencetext();
     }
-    public static void draw(){
-        Graphics paper = jPanel1.getGraphics();
-        paper.setColor(Color.black);
-        paper.setFont(new Font("courier", Font.PLAIN, 11));
-        String drawstring = Data_opslag_en_verwerking.sequence;
-        drawchars(drawstring);
-    }
-    
-    public static void drawchars(String drawstring){
+
+    /**
+     * zet de DNA of Aminozuursequentie met complementaire strand in de 2 textfields
+     */
+    public static void setsequencetext(){
+        int currentposition = 0;
+        try{
+        // huidige weergave positie wordt opgehaald
+        currentposition = Integer.parseInt(jTextField7.getText());
+        // locale variabelen
         Integer position = 0;
-        HashMap<Integer, String> substrings = new HashMap<>();
-        int teller = 0;
-        int substringnumber = 0;
-        String tempchar = "";
-        for (Character character : drawstring.toCharArray()){
-            tempchar += ""+character;
-            if (teller == 200){
-                teller = 0;
-                substrings.put(substringnumber, tempchar);
-                substringnumber +=1;
-                tempchar ="";     
-            }
-            teller+=1;
+        HashMap<Integer, String> substrings;
+        // er wordt gecheckt of de boolean uit de data oplag. aangeeft dat er een DNA sequentie wordt gevraagt of een Aminozuursequentie
+        if (Data_opslag_en_verwerking.dnaorprotein){//DNA sequentie weergeven
+        substrings = Data_opslag_en_verwerking.aminosubstrings;
+        jTextField8.setText(substrings.get(currentposition));  
+        jTextField9.setText(Data_opslag_en_verwerking.aminosubstringsreverse.get(currentposition));
+        jLabel13.setText("base "+currentposition*200+"|"+((currentposition*200)+200));
         }
-        Graphics paper = jPanel1.getGraphics();
-        paper.setColor(Color.black);
-        paper.setFont(new Font("TlwgMono", Font.PLAIN, 14));
-        for (String substring : substrings.values()){  
-            paper.drawString(substring, position ,200);
-            position+=14*200;
+        else{//aminozuursequentie weergeven
+        substrings = Data_opslag_en_verwerking.substrings;  
+        jTextField8.setText(substrings.get(currentposition));  
+        jTextField9.setText(Sequencetools.complement(substrings.get(currentposition)));
+        jLabel13.setText("base "+currentposition*200+"|"+((currentposition*200)+200));
+        }
+        // als het genen weergeven menuitem actief is, teken de annotatie in de GUI
+        if (jCheckBoxMenuItem1.getState()){
+            drawannotation(currentposition*200);
         }
         
+        }
+        catch (java.lang.NumberFormatException ex){
+        System.out.println("cannot find: "+jTextField7.getText());    
+    } 
+        
+        
+    }
+ 
+    /**
+     * teken lijnen en beschrijvingen in de jpanels voor de forward en reverse strand.
+     * @param currentpositioninput de huidige positie die gevisualiseerd wordt
+     */
+    public static void drawannotation(Integer currentpositioninput){
+        // haal graphics op voor de forward en reverse strand jpanels
+        Graphics paper = jPanel1.getGraphics();
+        Graphics paper2 = jPanel2.getGraphics();
+        // clear panel1
+        paper.setColor(Color.white);
+        paper.fillRect(0, 0, 2000, 2000);
+        paper.setColor(Color.black);
+        // clear panel2 
+        paper2.setColor(Color.white);
+        paper2.fillRect(0, 0, 2000, 2000);
+        paper2.setColor(Color.black);
+        // sla de curentpostion lokaal op en maak een double met dezelfde waarde voor berekeningen
+        Integer currentposition = currentpositioninput;
+        Double currentpositiondouble = currentposition.doubleValue();
+        Integer currentpositionstop = currentposition+200;
+        // loop over alle gene bestanden uit de dataopslag
+        for (Gene gene : Data_opslag_en_verwerking.genes){  
+            //loop over alle features voor elk gen
+            for (Feature feature : gene.getFeatures()){
+                //haal de start en stoppositie op uit de feature en sla deze op als double
+                Double start = feature.getStart().doubleValue();
+                Double stop = feature.getStop().doubleValue();
+                //als de range van de sequentie overlapt met de range van de gevisualiseerde sequentie teken deze feature
+                if (max(start,currentposition) <= min(stop,currentpositionstop)){
+                    //bereken het x coordinaat voor start en stop in px
+                    int startpositionx = (int) (1204.00*((start-currentpositiondouble)/200));
+                    int stoppositionx = (int) (1204.00*((stop-currentpositiondouble)/200));
+                    // als de huidige feature een transcript is, teken een zwarte lijn en schrijf de naam, beschrijving en score erboven of onder
+                    if (feature.getFeaturetype().contains("transcript")){
+                        //forward strand draw, teken de feature op de forward strand jpanel
+                        if (feature.getStrand() == 1){
+                        paper.setColor(Color.black);
+                        paper.drawString(gene.getSymbol(),startpositionx,190);
+                        if (jCheckBoxMenuItem2.getState()){
+                            paper.drawString("discription: "+gene.getDiscription(),startpositionx,160);
+                            paper.drawString("score: "+gene.getScore(),startpositionx,170);
+                        }
+                        paper.drawLine(startpositionx, 200,stoppositionx,200);
+                        }
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
+                        if (feature.getStrand() == 0){
+                        paper2.setColor(Color.black);
+                        paper2.drawString(gene.getSymbol(),startpositionx,20);
+                        if (jCheckBoxMenuItem2.getState()){
+                            paper2.drawString("discription: "+gene.getDiscription(),startpositionx,50);
+                            paper2.drawString("score: "+gene.getScore(),startpositionx,40);
+                        }
+                        paper2.drawLine(startpositionx, 10,stoppositionx,10);
+                        }
+                        
+                    }
+                    // als de huidige feature een start codon is teken een rode lijn in een jpanel
+                    if (feature.getFeaturetype().contains("start_codon")){
+                        //forward strand draw, teken de feature op de forward strand jpanel
+                        if (feature.getStrand() == 1){ 
+                        paper.setColor(Color.red);
+                        paper.drawLine(startpositionx, 200, stoppositionx,200);
+                        }
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
+                        if (feature.getStrand() == 0){ 
+                        paper2.setColor(Color.red);
+                        paper2.drawLine(startpositionx, 10, stoppositionx,10);
+                        }
+                    }
+                    // als de huidige feature een stop codon is teken een blauwe lijn in een jpanel
+                    if (feature.getFeaturetype().contains("stop_codon")){
+                        //forward strand draw, teken de feature op de forward strand jpanel
+                        if (feature.getStrand() == 1){ 
+                        paper.setColor(Color.blue);
+                        paper.drawLine(startpositionx, 200 ,stoppositionx, 200);
+                        }
+                        //reverse strand draw, teken de feature op de reverse strand jpanel
+                        if (feature.getStrand() == 0){ 
+                        paper2.setColor(Color.red);
+                        paper2.drawLine(startpositionx, 10, stoppositionx,10);
+                        }
+                    }
+                }
+                 
+            }
+    }
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -560,7 +774,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Annotation_viewer_GUI().setVisible(true);    
+                new Annotation_viewer_GUI().setVisible(true);   
             }
 
             
@@ -574,10 +788,18 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
     public static javax.swing.JButton jButton3;
     public static javax.swing.JButton jButton4;
     public static javax.swing.JButton jButton5;
+    public static javax.swing.JButton jButton6;
+    public static javax.swing.JButton jButton7;
+    public static javax.swing.JButton jButton8;
     public static javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    public static javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     public static javax.swing.JDialog jDialog1;
     public static javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel10;
+    public static javax.swing.JLabel jLabel11;
+    public static javax.swing.JLabel jLabel12;
+    public static javax.swing.JLabel jLabel13;
+    public static javax.swing.JLabel jLabel14;
     public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
     public static javax.swing.JLabel jLabel4;
@@ -599,29 +821,16 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem jMenuItem6;
     public static javax.swing.JMenuItem jMenuItem7;
     public static javax.swing.JPanel jPanel1;
-    public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTextField jTextField1;
+    public static javax.swing.JPanel jPanel2;
     private static javax.swing.JTextField jTextField2;
     public static javax.swing.JTextField jTextField3;
     public static javax.swing.JTextField jTextField4;
     private static javax.swing.JTextField jTextField5;
     private static javax.swing.JTextField jTextField6;
+    public static javax.swing.JTextField jTextField7;
+    public static javax.swing.JTextField jTextField8;
+    public static javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
-class MyAdjustmentListener implements AdjustmentListener {
-    // This method is called whenever the value of a scrollbar is changed,
-    // either by the user or programmatically.
-    public void adjustmentValueChanged(AdjustmentEvent evt) {
-        Adjustable source = evt.getAdjustable();
-        // getValueIsAdjusting() returns true if the user is currently
-        // dragging the scrollbar's knob and has not picked a final value
-        if (evt.getValueIsAdjusting()) {
-            // The user is dragging the knob
-            draw();
-            return;
-        }
 
-
-}
-}
 }

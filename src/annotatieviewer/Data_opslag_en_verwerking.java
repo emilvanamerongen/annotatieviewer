@@ -6,21 +6,58 @@
 package annotatieviewer;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- *
+ * de hoofdclass met opslag en verwerking van gegevens
  * @author emilvanamerongen, (Tjeerd van der Veen)
  */
 public class Data_opslag_en_verwerking {
 
-    
+    /**
+     *  hoofdopslag van de huidige DNA sequentie
+     */
     public static String sequence = "empty";
-    public static HashMap<Integer,Gene> genes = new HashMap<>();
-    public static HashMap<String,String> Translator = new HashMap<>(); //hij wou ze niet achter elkaar, dat gaf een foutmelding
-    public static String AmminoSequence;
+
+    /**
+     *  opslag van substrings van de huidige DNA sequentie
+     */
+    public static HashMap<Integer, String> substrings = new HashMap<>();
+
+    /**
+     *  opslag van de forward substrings van de huidige aminozuur sequentie
+     */
+    public static HashMap<Integer, String> aminosubstrings = new HashMap<>();
+
+    /**
+     *  opslag van de reverse substrings van de huidige aminozuur sequentie
+     */
+    public static HashMap<Integer, String> aminosubstringsreverse = new HashMap<>();
+
+    /**
+     *  opslag van annotatie in een arraylist met gene objecten (gekozen voor arraylist omdat hashmaps bugs veroorzaakte)
+     */
+    public static List<Gene> genes = new ArrayList<Gene>();
+
+    /**
+     *  hoofdopslag van de huidige aminozuur sequentie
+     */
+    public static String AminoSequence;
+
+    /**
+     *  oplag van de reverse aminozuur sequentie
+     */
+    public static String AminoSequencereverse;
+
+    /**
+     *  keuze tussen DNA sequentie weergave of aminozuursequentie weergave, opgeslagen als boolean
+     */
+    public static Boolean dnaorprotein = false;
     
     /**
+     * 
      * initiates the project
      * @param args the command line arguments
      */
@@ -34,97 +71,34 @@ public class Data_opslag_en_verwerking {
         new Annotation_viewer_GUI().setVisible(true);
     }
     /**
-     * sets the given sequence in the annotation viewer
-     * @param newsequence give the a sequence
+     * sla een nieuwe sequentie op en verwerk deze naar verschillende type opslag objecten
+     * @param newsequence die nieuwe DNA sequentie
      */
     public static void setsequence(String newsequence){
-        sequence = newsequence.replace(" ", "");
-        AmminoSequence=TranslateSequence(sequence);
+        // filter alle nextline en spaties uit de DNA sequentie
+        sequence = newsequence.replace("\n", "").replace(" ", "").replace("\r","");
+        // maak substrings van de DNA sequentie 
+        substrings = Sequencetools.createsubstrings(sequence);
+        // vertaal de sequentie naar aminozuren
+        AminoSequence = Sequencetools.TranslateSequence(sequence);
+        // vertaal de complementaire sequentie naar aminozuren
+        AminoSequencereverse = Sequencetools.TranslateSequence(Sequencetools.complement(sequence));
+        // maak substrings van de aminozuursequentie
+        aminosubstrings = Sequencetools.createsubstrings(AminoSequence);
+        // maak substrings van de complementaire aminozuursequentie
+        aminosubstringsreverse = Sequencetools.createsubstrings(AminoSequencereverse); 
+        // visualiseer de nieuwe data
         Annotation_viewer_GUI.visualise();
     }
-    public static String TranslateSequence(String sequence){
-        String NewSequence="";
-        int Nucleotides =sequence.length()/3;
-        Translator.put("atg", "met");
-        Translator.put("ttt", "phe");
-        Translator.put("ttc", "phe");
-        Translator.put("tta", "leu");
-        Translator.put("ttg", "leu");
-        Translator.put("ctt", "leu");
-        Translator.put("cta", "leu");
-        Translator.put("ctg", "leu");
-        Translator.put("att", "ile");
-        Translator.put("atc", "ile");
-        Translator.put("ata", "ile");
-        Translator.put("gta", "val");
-        Translator.put("gtg", "val");
-        Translator.put("gtt", "val");
-        Translator.put("gtc", "val");
-        Translator.put("tct", "ser");
-        Translator.put("tca", "ser");
-        Translator.put("tcg", "ser");
-        Translator.put("tcc", "ser");
-        Translator.put("cct", "pro");
-        Translator.put("cca", "pro");
-        Translator.put("ccg", "pro");
-        Translator.put("ccc", "pro");
-        Translator.put("act", "thr");
-        Translator.put("acg", "thr");
-        Translator.put("acc", "thr");
-        Translator.put("aca", "thr");
-        Translator.put("gct", "ala");
-        Translator.put("gca", "ala");
-        Translator.put("gcc", "ala");
-        Translator.put("gcg", "ala");
-        Translator.put("tat", "tyr");
-        Translator.put("tac", "tyr");
-        Translator.put("taa", "STP");
-        Translator.put("tag", "STP");
-        Translator.put("cat", "his");
-        Translator.put("cac", "his");
-        Translator.put("caa", "gln");
-        Translator.put("cag", "gln");
-        Translator.put("aat", "asn");
-        Translator.put("aac", "asn");
-        Translator.put("aaa", "lys");
-        Translator.put("aag", "lys");
-        Translator.put("gat", "asp");
-        Translator.put("gac", "asp");
-        Translator.put("gaa", "glu");
-        Translator.put("gag", "glu");
-        Translator.put("tgt", "cys");
-        Translator.put("tgc", "cys");
-        Translator.put("uta", "STP");
-        Translator.put("tgg", "trp");
-        Translator.put("cgt", "arg");
-        Translator.put("cgc", "arg");
-        Translator.put("cgg", "arg");
-        Translator.put("cga", "arg");
-        Translator.put("agt", "ser");
-        Translator.put("agc", "ser");
-        Translator.put("aga", "arg");
-        Translator.put("agg", "arg");
-        Translator.put("ggt", "gly");
-        Translator.put("gga", "gly");
-        Translator.put("ggc", "gly");
-        Translator.put("ggg", "gly");
-        for(int i=0;i<Nucleotides;i++){
-            String codon = (String) sequence.subSequence(i, i+3);
-            if (Translator.get(codon)==null){
-                AmminoSequence+="***";
-            }else{
-                AmminoSequence+=Translator.get(codon);
-            }
-            }
-        System.out.println(AmminoSequence);
-        return NewSequence;
-    }
+        
+
     /**
-     * sets the genes in the annotiation viewer
-     * @param newgenes 
+     * sla nieuwe annotatie gene objecten op in de Arraylist met genen
+     * @param newgenes nieuwe list met genen die opgeslagen moeten worden
      */
-    public static void setgenes(HashMap<Integer,Gene> newgenes){
-        genes = newgenes;
+    public static void setgenes(List<Gene> newgenes){
+        genes.addAll(newgenes);
+        // visualiseer de nieuwe data
         Annotation_viewer_GUI.visualise();
     }    
 }
