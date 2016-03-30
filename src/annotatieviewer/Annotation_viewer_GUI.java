@@ -494,14 +494,14 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
    
     
     public static void visualise(){  
-        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*5.34), 450));
+        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*4.85), 450));
         draw();
     }
     public static void draw(){
         Graphics paper = jPanel1.getGraphics();
         paper.setColor(Color.black);
         paper.setFont(new Font("courier", Font.PLAIN, 11));
-        paper.drawString(Data_opslag_en_verwerking.sequence, 20, 20);
+        paper.drawString(Data_opslag_en_verwerking.sequence, 20, 200);
     }
 
 
