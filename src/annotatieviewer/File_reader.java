@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JFileChooser;
 
 /**
@@ -68,7 +70,7 @@ public class File_reader {
         String stop = "";
         int strand = 0;
         HashMap<Integer, Feature> featuretemp = new HashMap<>();
-        HashMap<Integer, Gene> newgenes = new HashMap<>();
+        List<Gene> newgenes = new ArrayList<Gene>();
         for (String line : Files.readAllLines(filepath)){
             if (line.contains("start gene")){
                 genenumber += 1;
@@ -78,7 +80,7 @@ public class File_reader {
                 String[] linesplit = line.split("\t");
                 discription = linesplit[8];
                 score = linesplit[5];
-                newgenes.put(genenumber, new Gene(genename,genenumber,discription,score));
+                newgenes.add(new Gene(genename,genenumber,discription,score));
             }
             if (line.contains("SD\t")){
                 featurenumber += 1;
@@ -94,7 +96,7 @@ public class File_reader {
                     strand = 1;
                 }
                 Feature newfeature = new Feature(featurenumber,featuretype,Integer.parseInt(start),Integer.parseInt(stop),strand);
-                newgenes.get(genenumber).addFeature(newfeature);
+                newgenes.get(genenumber-1).addFeature(newfeature);
             }
             if (line.contains("coding")){               
                 featuretemp.clear();

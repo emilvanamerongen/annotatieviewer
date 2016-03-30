@@ -6,7 +6,9 @@
 package annotatieviewer;
 
 import java.sql.* ;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -24,26 +26,30 @@ public class DatabaseConnector{
         if (type == 1){
             System.out.println("getting sequence "+sequentienr+" from database...");
             ResultSet results = excecutequery(conn,"SELECT sequence FROM sequence WHERE sequence_id = "+sequentienr);
+            int teller = 1;
             while (results.next()) {
-            Data_opslag_en_verwerking.setsequence(results.getString("sequence"));
+                if (teller == 1){
+                Data_opslag_en_verwerking.setsequence(results.getString("sequence"));
+                teller = 0;
+                }
         }    
             System.out.println("sequence imported");
         }
         if (type == 2){
             System.out.println("getting annotation for sequence "+sequentienr+" from database...");
             System.out.println("creating gene objects...");
-            HashMap<Integer, Gene> newgenes = new HashMap<>();
+            List<Gene> newgenes = new ArrayList<Gene>();
             ResultSet results = excecutequery(conn,"SELECT * FROM gene WHERE sequence_sequence_id = "+sequentienr);
             while (results.next()) {
                 Gene newgene = new Gene(results.getString("symbol"),Integer.parseInt(results.getString("gene_id")),results.getString("discription"),results.getString("score"));
-                newgenes.put(Integer.parseInt(results.getString("gene_id")), newgene);
+                newgenes.add(newgene);
         } 
             System.out.println("created "+newgenes.size()+" gene objects");
             System.out.println("populating gene objects with features...");
             ResultSet results2 = excecutequery(conn,"SELECT * FROM features WHERE gene_sequence_sequence_id = "+sequentienr);
             while (results2.next()) {
                 Feature newfeature = new Feature(Integer.parseInt(results2.getString("feature_id")),results2.getString("featuretype"),Integer.parseInt(results2.getString("start")),Integer.parseInt(results2.getString("stop")),Integer.parseInt(results2.getString("strand")));
-                newgenes.get(Integer.parseInt(results2.getString("gene_gene_id"))).addFeature(newfeature);
+                newgenes.get(Integer.parseInt(results2.getString("gene_gene_id"))-1).addFeature(newfeature);
             }
             System.out.println("annotation imported");
             Data_opslag_en_verwerking.setgenes(newgenes);

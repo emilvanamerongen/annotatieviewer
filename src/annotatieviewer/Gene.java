@@ -5,7 +5,9 @@
  */
 package annotatieviewer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -16,7 +18,7 @@ public class Gene {
     private int gene_id;
     private String discription;
     private String score;
-    private HashMap<Integer,Feature> features = new HashMap<>();
+    private List<Feature> features = new ArrayList<Feature>();
 
     /**
      *
@@ -76,14 +78,14 @@ public class Gene {
     /**
      * @return the features
      */
-    public HashMap<Integer,Feature> getFeatures() {
+    public List<Feature> getFeatures() {
         return features;
     }
 
     /**
      * @param features the features to set
      */
-    public void setFeatures(HashMap<Integer,Feature> features) {
+    public void setFeatures(List<Feature> features) {
         this.features = features;
     }
     
@@ -92,8 +94,7 @@ public class Gene {
      * @param newfeature
      */
     public void addFeature(Feature newfeature){
-        Integer featureid = newfeature.getFeature_id();
-        this.features.put(featureid, newfeature);
+        this.features.add(newfeature);
     }
 
     /**
