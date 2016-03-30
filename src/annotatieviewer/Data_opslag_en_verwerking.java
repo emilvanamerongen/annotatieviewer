@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Data_opslag_en_verwerking {
 
     
-    public static String sequence = "";
+    public static String sequence = "empty";
     public static HashMap<Integer,Gene> genes = new HashMap<>();
     public static HashMap<String,String> Translator = new HashMap<>(); //hij wou ze niet achter elkaar, dat gaf een foutmelding
     public static String AmminoSequence;

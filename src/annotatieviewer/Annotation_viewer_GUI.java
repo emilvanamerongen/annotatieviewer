@@ -9,6 +9,7 @@ import static annotatieviewer.Annotation_viewer_GUI.jScrollPane1;
 import java.awt.Adjustable;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.AdjustmentEvent;
@@ -252,12 +253,12 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jLabel5.setText("Annotatie viewer - projectgroep 8");
 
         jScrollPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jScrollPane1AncestorMoved(evt);
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jScrollPane1AncestorMoved(evt);
             }
         });
         jScrollPane1.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -273,10 +274,10 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
             }
         });
         jScrollPane1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jScrollPane1CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jScrollPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -375,10 +376,10 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                         .addGap(118, 118, 118)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,12 +395,10 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -495,13 +494,14 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
    
     
     public static void visualise(){  
-        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*5.34), 450));
+        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*4.85), 450));
         draw();
     }
     public static void draw(){
-        Graphics2D paper = (Graphics2D)jPanel1.getGraphics();
+        Graphics paper = jPanel1.getGraphics();
         paper.setColor(Color.black);
-        paper.drawString(Data_opslag_en_verwerking.sequence, 60, 200);
+        paper.setFont(new Font("courier", Font.PLAIN, 11));
+        paper.drawString(Data_opslag_en_verwerking.sequence, 20, 200);
     }
 
 
