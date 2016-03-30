@@ -5,13 +5,19 @@
  */
 package annotatieviewer;
 
-import java.io.File;
+import static annotatieviewer.Annotation_viewer_GUI.jScrollPane1;
+import java.awt.Adjustable;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 /**
  *
@@ -21,7 +27,8 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Annotation_viewer_GUI
-     */
+     */   
+    
     public Annotation_viewer_GUI() {
         initComponents();
     }
@@ -244,15 +251,53 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("VAGRounded BT", 0, 24)); // NOI18N
         jLabel5.setText("Annotatie viewer - projectgroep 8");
 
+        jScrollPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jScrollPane1AncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                jScrollPane1AncestorMoved1(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jScrollPane1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jScrollPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jScrollPane1PropertyChange(evt);
+            }
+        });
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 100));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2000, 450));
+        jPanel1.setVerifyInputWhenFocusTarget(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1004, Short.MAX_VALUE)
+            .addGap(0, 2000, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 487, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -324,7 +369,7 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
+                        .addGap(142, 142, 142)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
@@ -335,9 +380,9 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,9 +397,9 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -425,9 +470,42 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jScrollPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jScrollPane1PropertyChange
+                AdjustmentListener listener = new MyAdjustmentListener();
+                jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(listener);
+    }//GEN-LAST:event_jScrollPane1PropertyChange
+
+    private void jScrollPane1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jScrollPane1CaretPositionChanged
+
+    }//GEN-LAST:event_jScrollPane1CaretPositionChanged
+
+    private void jScrollPane1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseReleased
+
+    }//GEN-LAST:event_jScrollPane1MouseReleased
+
+    private void jScrollPane1AncestorMoved1(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jScrollPane1AncestorMoved1
+
+    }//GEN-LAST:event_jScrollPane1AncestorMoved1
+
+    private void jScrollPane1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jScrollPane1AncestorMoved
+
+    }//GEN-LAST:event_jScrollPane1AncestorMoved
+
+            
+   
+    
+    public static void visualise(){  
+        jPanel1.setPreferredSize(new Dimension((int) (Data_opslag_en_verwerking.sequence.length()*5.34), 450));
+        draw();
+    }
+    public static void draw(){
+        Graphics2D paper = (Graphics2D)jPanel1.getGraphics();
+        paper.setColor(Color.black);
+        paper.drawString(Data_opslag_en_verwerking.sequence, 60, 200);
+    }
+
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -455,10 +533,13 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Annotation_viewer_GUI().setVisible(true);
+                new Annotation_viewer_GUI().setVisible(true);    
             }
+
+            
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton jButton1;
@@ -499,4 +580,21 @@ public class Annotation_viewer_GUI extends javax.swing.JFrame {
     private static javax.swing.JTextField jTextField5;
     private static javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
+
+class MyAdjustmentListener implements AdjustmentListener {
+    // This method is called whenever the value of a scrollbar is changed,
+    // either by the user or programmatically.
+    public void adjustmentValueChanged(AdjustmentEvent evt) {
+        Adjustable source = evt.getAdjustable();
+        // getValueIsAdjusting() returns true if the user is currently
+        // dragging the scrollbar's knob and has not picked a final value
+        if (evt.getValueIsAdjusting()) {
+            // The user is dragging the knob
+            draw();
+            return;
+        }
+
+
+}
+}
 }
